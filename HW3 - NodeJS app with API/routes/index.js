@@ -12,15 +12,17 @@ router.get('/', function(req, res, next) {
     qs: { format: 'json' },
     headers:
         { 'Postman-Token': 'e520c9f3-5fe1-44f3-97c7-37ffce71d2fb',
+          'Content-Type': 'application/json',
           'cache-control': 'no-cache' } };
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
-    console.log(body);
-    var results = JSON.stringify(body);
-    results = JSON.parse(results);
-    console.log("Res:", results);
-    res.render('index', { title: 'Cat Photo Generator', data: results})
+
+    console.log("body:", body);
+
+     var results = JSON.parse(body);
+    console.log("Results parsed:", results);
+
+    res.render('index', { title: 'Cat Photo Generator', data: results[0]})
   });
 });
 module.exports = router;
-
