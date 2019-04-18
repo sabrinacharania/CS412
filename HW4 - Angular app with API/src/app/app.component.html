@@ -1,0 +1,57 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    {{ title }}!
+  </h1><br>
+</div>
+<img src="{{ results }}" alt="your new cat" height="300px">
+<h4>Create a profile with this cat</h4>
+<!--<a routerLink="/main" routerLinkActive="active">Main</a>-->
+<!--<createContact>Create a profile with this cat</createContact>-->
+<h4>View existing profiles </h4>
+<a routerLink="/contact" routerLinkActive="active">Contacts</a>
+
+<h2>Profiles</h2>
+
+<ul>
+  <li *ngFor="let contact of contacts" (click)="onSelect(contact)" [class.selected]="contact === selectedContact">
+      <span class="badge">{{contact.name}}</span> <img src="{{ contact.cat }}" alt="your new cat" height="300px">
+    </span>
+    <button class="delete-button" (click)="deleteContact(contact, $event)">Delete</button>
+  </li>
+</ul>
+
+<div class="error" *ngIf="error">{{error}}</div>
+<button (click)="addContact()">Add New Contact</button>
+<div *ngIf="addingContact">
+  <app-contact-component (close)="close($event)"></app-contact-component>
+</div>
+
+<div *ngIf="selectedContact">
+  <h2>
+    {{selectedContact.name | uppercase}}'s cat:
+    <img src="{{ selectedContact.cat }}" alt="your new cat" height="300px">
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
+
+<div>
+  <style>
+    .hidden { visibility: hidden}
+  </style>
+  <h4>ngFor Features</h4>
+  <button (click)="showNgFor=!showNgFor">{{showNgFor ? 'Hide' : 'Show'}} ngFor Features</button>
+  <table [class.hidden]="!showNgFor">
+    <tbody>
+    <tr *ngFor="let contact of contacts; let ix = index; let c = count; let e = even; let o = odd; let f = first; let l = last">
+      <td>{{contact.name}}</td>
+      <td>{{ix}}</td>
+      <td>{{c}}</td>
+      <td>{{e}}</td>
+      <td>{{o}}</td>
+      <td>{{f}}</td>
+      <td>{{l}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
